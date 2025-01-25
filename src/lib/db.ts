@@ -1,15 +1,14 @@
-import sqlite3 from "sqlite3"; // SQLite3 driver
-import { open } from "sqlite"; // Helper for async SQLite operations
+import sqlite3 from "sqlite3"; 
+import { open } from "sqlite";
 
-// Function to open the database
+
 export async function openDb() {
   return open({
-    filename: "./auth.db", // Path to SQLite file
-    driver: sqlite3.Database, // Specify SQLite driver
+    filename: "./auth.db", 
+    driver: sqlite3.Database, 
   });
 }
 
-// Initialize the database with a users table
 async function initDb() {
   const db = await openDb();
   await db.exec(`
@@ -19,6 +18,7 @@ async function initDb() {
       email TEXT NOT NULL UNIQUE
     )
   `);
+    // good practice to close it await db.close();
   console.log("Users table created");
 }
 
